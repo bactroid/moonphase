@@ -2,7 +2,7 @@ var lune = require('lune');
 
 // Get date range for phase_range
 var today = new Date();
-var endDate = getEndDate();
+var endDate = getEndDate(today);
 
 // Load next full moon date
 phases = lune.phase_range(today, endDate, lune.PHASE_FULL);
@@ -15,9 +15,9 @@ var newMoon = new Date(phases[0]);
 console.log('Next full moon is on: \n' + fullMoon);
 console.log('Next new moon is on: \n' + newMoon);
 
-// Returns the day 30 days from now
-function getEndDate () {
-    var date = new Date();
+// Returns the day 30 days from startDate
+function getEndDate (startDate) {
+    var date = new Date(startDate.toDateString());
     date.setDate(date.getDate() + 30);
     return date;
 }
