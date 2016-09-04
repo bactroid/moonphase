@@ -7,5 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kate Haskell",
-  "license": "ISC"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "lune": "^0.4.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bactroid/moonphase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bactroid/moonphase/issues"
+  },
+  "homepage": "https://github.com/bactroid/moonphase#readme"
 }
