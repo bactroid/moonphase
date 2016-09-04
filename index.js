@@ -12,13 +12,8 @@ var fullMoon = new Date(phases[0]);
 phases = lune.phase_range(today, endDate, lune.PHASE_NEW);
 var newMoon = new Date(phases[0]);
 
-if (fullMoon > today) {
-    console.log('Next full moon is on: \n' + fullMoon);
-}
-
-if (newMoon > today) {
-    console.log('Next new moon is on: \n' + newMoon);
-}
+console.log('Next full moon is on: \n' + fullMoon);
+console.log('Next new moon is on: \n' + newMoon);
 
 // Returns the day 30 days from now
 function getEndDate () {
