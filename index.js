@@ -1,8 +1,15 @@
 var lune = require('lune');
 
-function getPhases() {
+function getPhases(d) {
     // Get date range for phase_range
-    var startDate = new Date();
+    if (d === undefined) {
+        var startDate = new Date();
+    }
+
+    else {
+        var startDate = new Date(d);
+    }
+
     var endDate = getEndDate(startDate);
 
     // Load next full moon date
@@ -43,4 +50,4 @@ function printNextFullMoon(date) {
     console.log('Next full moon is on: \n' + date);
 }
 
-module.exports = getPhases();
+module.exports = getPhases(process.argv[2]);
