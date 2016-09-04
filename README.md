@@ -4,6 +4,13 @@ NPM module to display the current moon phase and along with the next new and ful
 
 Currently running from the command line, but hopefully eventually running as a system tray app using Electron.
 
+## Usage
+```
+moonphase [date]
+```
+
+The optional `date` parameter should be formatted as an ISO 8601 date (YYYY-MM-DD).
+
 ## Dependencies
 
 ### Lune
