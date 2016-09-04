@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kate Haskell <fuzzcat@bactroid.net>",
+  "bin": {
+    "moonphase": "./bin/moonphase"
+  },
   "license": "GPL-3.0",
   "dependencies": {
     "lune": "^0.4.0"

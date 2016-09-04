@@ -1,27 +1,29 @@
 var lune = require('lune');
 
-// Get date range for phase_range
-var startDate = new Date();
-var endDate = getEndDate(startDate);
+function getPhases() {
+    // Get date range for phase_range
+    var startDate = new Date();
+    var endDate = getEndDate(startDate);
 
-// Load next full moon date
-phases = lune.phase_range(startDate, endDate, lune.PHASE_FULL);
-var fullMoon = new Date(phases[0]);
+    // Load next full moon date
+    phases = lune.phase_range(startDate, endDate, lune.PHASE_FULL);
+    var fullMoon = new Date(phases[0]);
 
-// Load next new moon date
-phases = lune.phase_range(startDate, endDate, lune.PHASE_NEW);
-var newMoon = new Date(phases[0]);
+    // Load next new moon date
+    phases = lune.phase_range(startDate, endDate, lune.PHASE_NEW);
+    var newMoon = new Date(phases[0]);
 
-// Logic to display appropriate next moon phases
-// We don't want to describe the phases out of order.
-if (newMoon > fullMoon) {
-    printNextFullMoon(fullMoon);
-    printNextNewMoon(newMoon);
-}
+    // Logic to display appropriate next moon phases
+    // We don't want to describe the phases out of order.
+    if (newMoon > fullMoon) {
+        printNextFullMoon(fullMoon);
+        printNextNewMoon(newMoon);
+    }
 
-else {
-    printNextNewMoon(newMoon);
-    printNextFullMoon(fullMoon);
+    else {
+        printNextNewMoon(newMoon);
+        printNextFullMoon(fullMoon);
+    }
 }
 
 // Returns the day 30 days from startDate
@@ -40,3 +42,5 @@ function printNextNewMoon(date) {
 function printNextFullMoon(date) {
     console.log('Next full moon is on: \n' + date);
 }
+
+module.exports = getPhases();
