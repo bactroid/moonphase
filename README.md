@@ -6,7 +6,7 @@ Currently running from the command line, but hopefully eventually running as a s
 
 ## Dependencies
 
-## Lune
+### Lune
 
 Uses Lune by Ryan Seys for lunar phase calculations. Hooray for standing on the shoulders of giants because I was *not* looking forward to working out those calculations.
 
