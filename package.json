@@ -1,12 +1,12 @@
 {
   "name": "moonphase",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Displays current moon phase and days to next full/new moon",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Kate Haskell",
+  "author": "Kate Haskell <fuzzcat@bactroid.net>",
   "license": "GPL-3.0",
   "dependencies": {
     "lune": "^0.4.0"
