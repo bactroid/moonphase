@@ -12,6 +12,8 @@ var fullMoon = new Date(phases[0]);
 phases = lune.phase_range(startDate, endDate, lune.PHASE_NEW);
 var newMoon = new Date(phases[0]);
 
+// Logic to display appropriate next moon phases
+// We don't want to describe the phases out of order.
 if (newMoon > fullMoon) {
     printNextFullMoon(fullMoon);
     printNextNewMoon(newMoon);
