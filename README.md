@@ -23,3 +23,6 @@ GitHub: https://github.com/ryanseys/lune
 ### validator
 
 Used for validation of user input.
+
+NPM: https://www.npmjs.com/package/validator  
+GitHub: https://github.com/chriso/validator.js
