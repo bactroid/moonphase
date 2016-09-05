@@ -1,4 +1,5 @@
 var lune = require('lune');
+var validator = require('validator');
 
 function getPhases(d) {
     // Get date range for phase_range
@@ -7,7 +8,11 @@ function getPhases(d) {
     }
 
     else {
-        var startDate = new Date(d);
+        if (validator.isDate(d)) var startDate = new Date(d);
+        else {
+            console.error('Invalid date format');
+            return;
+        }
     }
 
     var endDate = getEndDate(startDate);

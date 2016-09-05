@@ -12,7 +12,8 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
-    "lune": "^0.4.0"
+    "lune": "^0.4.0",
+    "validator": "^5.6.0"
   },
   "devDependencies": {},
   "repository": {
