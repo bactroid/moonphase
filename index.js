@@ -86,8 +86,9 @@ function printMoonPhase(checkDate) {
     else if (checkDate > lastQuarter)
         var phaseText = 'Waning Crescent';
 
-    console.log(phaseText);
     phaseInfo = lune.phase(checkDate);
+    percent = Math.round(phaseInfo.illuminated * 100);
+    console.log(phaseText + ' (' + percent + '%)');
 }
 
 // Log next new moon date to the console
