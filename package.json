@@ -4,7 +4,7 @@
   "description": "Displays current moon phase and days to next full/new moon",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/test.js"
   },
   "author": "Kate Haskell <fuzzcat@bactroid.net>",
   "bin": {
@@ -15,7 +15,10 @@
     "lune": "^0.4.0",
     "validator": "^5.6.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bactroid/moonphase.git"
