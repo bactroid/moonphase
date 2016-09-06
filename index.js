@@ -1,2 +1,2 @@
 var moonphase = require('./moonphase');
-process.stdout.write(moonphase.getPhases(process.argv[2]));
+process.stdout.write(moonphase.getPhaseText(process.argv[2]));

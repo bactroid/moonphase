@@ -1,7 +1,7 @@
 var lune = require('lune');
 var validator = require('validator');
 
-function getPhases(d) {
+function getPhaseText(d) {
     var returnText = '';
     // Get date range for phase_range
     if (d === undefined) {
@@ -110,7 +110,7 @@ function getNextFullMoon(date) {
 }
 
 module.exports = {
-    getPhases: getPhases,
+    getPhaseText: getPhaseText,
     getIlluminationPercent: getIlluminationPercent,
     getEndDate: getEndDate,
     getMoonPhase: getMoonPhase,
