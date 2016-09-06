@@ -26,7 +26,8 @@ function getPhases(d) {
     phases = lune.phase_range(startDate, endDate, lune.PHASE_NEW);
     var newMoon = new Date(phases[0]);
 
-    returnText += getMoonPhase(startDate);
+    returnText = getMoonPhase(startDate) + ' (' +
+                 getIlluminationPercent(startDate) + '%)\n';
 
     // Logic to display appropriate next moon phases
     // We don't want to describe the phases out of order.
@@ -52,7 +53,7 @@ function getEndDate (startDate) {
 
 // Return the current phase of the moon with a natural language response
 // and a percentage
-// e.g. "Waxing Crescent (25%)"
+// e.g. "Waxing Crescent"
 function getMoonPhase(checkDate) {
     phaseList = lune.phase_hunt(checkDate);
 
@@ -90,7 +91,7 @@ function getMoonPhase(checkDate) {
         var phaseText = 'Waning Crescent';
 
     percent = getIlluminationPercent(checkDate);
-    return phaseText + ' (' + percent + '%)' + '\n';
+    return phaseText;
 }
 
 function getIlluminationPercent (date) {
