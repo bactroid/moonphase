@@ -111,6 +111,7 @@ function getNextFullMoon(date) {
 
 module.exports = {
     getPhases: getPhases,
+    getIlluminationPercent: getIlluminationPercent,
     getEndDate: getEndDate,
     getMoonPhase: getMoonPhase,
     getNextNewMoon: getNextNewMoon,
