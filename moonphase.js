@@ -17,28 +17,21 @@ function getPhaseText(d) {
     }
 
     var endDate = getEndDate(startDate);
-
-    // Load next full moon date
-    phases = lune.phase_range(startDate, endDate, lune.PHASE_FULL);
-    var fullMoon = new Date(phases[0]);
-
-    // Load next new moon date
-    phases = lune.phase_range(startDate, endDate, lune.PHASE_NEW);
-    var newMoon = new Date(phases[0]);
+    var phases = getPhases(startDate, endDate);
 
     returnText = getMoonPhase(startDate) + ' (' +
                  getIlluminationPercent(startDate) + '%)\n';
 
     // Logic to display appropriate next moon phases
     // We don't want to describe the phases out of order.
-    if (newMoon > fullMoon) {
-        returnText += getNextFullMoon(fullMoon);
-        returnText += getNextNewMoon(newMoon);
+    if (phases.newMoon > phases.fullMoon) {
+        returnText += getNextFullMoon(phases.fullMoon);
+        returnText += getNextNewMoon(phases.newMoon);
     }
 
     else {
-        returnText += getNextNewMoon(newMoon);
-        returnText += getNextFullMoon(fullMoon);
+        returnText += getNextNewMoon(phases.newMoon);
+        returnText += getNextFullMoon(phases.fullMoon);
     }
 
     return returnText;
@@ -99,6 +92,23 @@ function getIlluminationPercent (date) {
     return Math.round(phaseInfo.illuminated * 100);
 }
 
+// Return an object with the next new and full moon as Date object
+// properties
+function getPhases(start, end) {
+    var phase;
+    // Load next full moon date
+    phase = lune.phase_range(start, end, lune.PHASE_FULL);
+    var fullMoon = new Date(phase[0]);
+
+    // Load next new moon date
+    phase = lune.phase_range(start, end, lune.PHASE_NEW);
+    var newMoon = new Date(phase[0]);
+    return {
+        newMoon: newMoon,
+        fullMoon: fullMoon
+    }
+}
+
 // Return next new moon date text
 function getNextNewMoon(date) {
     return 'Next new moon is on: \n' + date + '\n';
@@ -114,6 +124,5 @@ module.exports = {
     getIlluminationPercent: getIlluminationPercent,
     getEndDate: getEndDate,
     getMoonPhase: getMoonPhase,
-    getNextNewMoon: getNextNewMoon,
-    getNextFullMoon: getNextFullMoon
+    getPhases: getPhases
 };

@@ -4,6 +4,11 @@ var moonphase = require('../moonphase');
 var result;
 var dateOne = new Date('2015-12-25 05:00');
 var dateTwo = new Date('2016-09-05 05:00');
+var startDate = new Date('2016-01-01 00:00 EST');
+var endDate = new Date('2016-01-31 00:00 EST');
+var knownNew = new Date('Sat Jan 09 2016 20:31:16.321 GMT-0500 (EST)');
+var knownFull = new Date('Sat Jan 23 2016 20:46:20.217 GMT-0500 (EST)');
+
 
 describe('getMoonPhase', function () {
     it('should return Full Moon for 2015-12-25', function () {
@@ -27,25 +32,17 @@ describe('getIlluminationPercent', function () {
     });
 });
 
-describe('getEndDate', function() {
+describe('getEndDate', function () {
     it('should return 2016-01-31 for 2016-01-01', function () {
-        startDate = new Date('2016-01-01 00:00 EST');
-        endDate = new Date('2016-01-31 00:00 EST');
         result = moonphase.getEndDate(startDate);
         expect(result.valueOf()).to.equal(endDate.valueOf());
     });
 });
 
-describe('getNextNewMoon', function() {
-    it('should return a string', function () {
-        result = moonphase.getNextNewMoon(new Date());
-        expect(result).to.be.a('string');
-    });
-});
-
-describe('getNextFullMoon', function() {
-    it('should return a string', function () {
-        result = moonphase.getNextFullMoon(new Date());
-        expect(result).to.be.a('string');
+describe('getPhases', function () {
+    it('should return correct phase dates for a known period', function () {
+        result = moonphase.getPhases(startDate, endDate);
+        expect(result.newMoon.valueOf()).to.equal(knownNew.valueOf());
+        expect(result.fullMoon.valueOf()).to.equal(knownFull.valueOf());
     });
 });
