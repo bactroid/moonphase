@@ -4,7 +4,7 @@
   "description": "Displays current moon phase and days to next full/new moon",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "node node_modules/mocha/bin/mocha test/test.js"
   },
   "author": "Kate Haskell <fuzzcat@bactroid.net>",
   "bin": {
