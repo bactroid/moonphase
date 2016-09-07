@@ -77,3 +77,10 @@ describe('getPhaseInfo', function () {
         expect(result).to.equal(undefined);
     });
 });
+
+describe('getPhaseText', function () {
+    it('should return empty string if date format is invalid', function () {
+        result = moonphase.getPhaseText('notadate');
+        expect(result).to.equal('');
+    });
+});
