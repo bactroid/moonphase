@@ -3,7 +3,7 @@ var validator = require('validator');
 
 function getPhaseInfo(d) {
     var startDate = setStartDate(d);
-    
+
     if (startDate === null) {
         console.error('Invalid date format');
         return;
@@ -24,28 +24,24 @@ function getPhaseInfo(d) {
 function getPhaseText(d) {
     var returnText = '';
 
-    var startDate = setStartDate(d);
-    if (startDate === null) {
-        console.error('Invalid date format');
-        return '';
-    }
+    phaseInfo = getPhaseInfo(d);
+    if (phaseInfo === undefined) return '';
 
-    var endDate = getEndDate(startDate);
-    var phases = getPhases(startDate, endDate);
-
-    returnText = getMoonPhase(startDate) + ' (' +
-                 getIlluminationPercent(startDate) + '%)\n';
+    returnText += phaseInfo.phaseText;
+    returnText += ' (';
+    returnText += phaseInfo.illuminationPercent;
+    returnText += '%)\n'
 
     // Logic to display appropriate next moon phases
     // We don't want to describe the phases out of order.
-    if (phases.newMoon > phases.fullMoon) {
-        returnText += getNextFullMoon(phases.fullMoon);
-        returnText += getNextNewMoon(phases.newMoon);
+    if (phaseInfo.nextNew > phaseInfo.nextFull) {
+        returnText += getNextFullMoon(phaseInfo.nextFull);
+        returnText += getNextNewMoon(phaseInfo.nextNew);
     }
 
     else {
-        returnText += getNextNewMoon(phases.newMoon);
-        returnText += getNextFullMoon(phases.fullMoon);
+        returnText += getNextNewMoon(phaseInfo.nextNew);
+        returnText += getNextFullMoon(phaseInfo.nextFull);
     }
 
     return returnText;
