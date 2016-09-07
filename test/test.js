@@ -72,4 +72,8 @@ describe('getPhaseInfo', function () {
         expect(result.nextNew.valueOf()).to.equal(knownNew.valueOf());
         expect(result.nextFull.valueOf()).to.equal(knownFull.valueOf());
     });
+    it('should return nothing if date format is invalid', function() {
+        result = moonphase.getPhaseInfo('notadate');
+        expect(result).to.equal(undefined);
+    });
 });

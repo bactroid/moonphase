@@ -3,6 +3,12 @@ var validator = require('validator');
 
 function getPhaseInfo(d) {
     var startDate = setStartDate(d);
+    
+    if (startDate === null) {
+        console.error('Invalid date format');
+        return;
+    }
+
     var endDate = getEndDate(startDate);
     var phaseText = getMoonPhase(startDate);
     var illuminationPercent = getIlluminationPercent(startDate);
