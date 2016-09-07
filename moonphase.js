@@ -3,17 +3,11 @@ var validator = require('validator');
 
 function getPhaseText(d) {
     var returnText = '';
-    // Get date range for phase_range
-    if (d === undefined) {
-        var startDate = new Date();
-    }
 
-    else {
-        if (validator.isDate(d)) var startDate = new Date(d + ' 05:00');
-        else {
-            console.error('Invalid date format');
-            return;
-        }
+    var startDate = setStartDate(d);
+    if (startDate === null) {
+        console.error('Invalid date format');
+        return '';
     }
 
     var endDate = getEndDate(startDate);
@@ -35,6 +29,19 @@ function getPhaseText(d) {
     }
 
     return returnText;
+}
+
+function setStartDate(date) {
+    if (date === undefined) {
+        return new Date();
+    }
+
+    else {
+        if (validator.isDate(date)) return new Date(date + ' 05:00');
+        else {
+            return null;
+        }
+    }
 }
 
 // Returns the day 30 days from startDate
