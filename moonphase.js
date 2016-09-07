@@ -1,6 +1,20 @@
 var lune = require('lune');
 var validator = require('validator');
 
+function getPhaseInfo(d) {
+    var startDate = setStartDate(d);
+    var endDate = getEndDate(startDate);
+    var phaseText = getMoonPhase(startDate);
+    var illuminationPercent = getIlluminationPercent(startDate);
+    var nextPhases = getPhases(startDate, endDate);
+    return {
+        phaseText: phaseText,
+        illuminationPercent: illuminationPercent,
+        nextNew: nextPhases.newMoon,
+        nextFull: nextPhases.fullMoon
+    };
+}
+
 function getPhaseText(d) {
     var returnText = '';
 
@@ -127,6 +141,7 @@ function getNextFullMoon(date) {
 }
 
 module.exports = {
+    getPhaseInfo: getPhaseInfo,
     getPhaseText: getPhaseText,
     getIlluminationPercent: getIlluminationPercent,
     getEndDate: getEndDate,
