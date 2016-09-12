@@ -26,3 +26,16 @@ Used for validation of user input.
 
 NPM: https://www.npmjs.com/package/validator  
 GitHub: https://github.com/chriso/validator.js
+
+## Icon Credits
+
+First Quarter Moon by MarkieAnn Packer from the Noun Project  
+New Moon by MarkieAnn Packer from the Noun Project  
+Waxing Crescent Moon by MarkieAnn Packer from the Noun Project  
+Waxing Gibbous Moon by MarkieAnn Packer from the Noun Project  
+Waning Crescent Moon by MarkieAnn Packer from the Noun Project  
+Third Quarter Moon by MarkieAnn Packer from the Noun Project  
+Waning Gibbous Moon by MarkieAnn Packer from the Noun Project  
+Full Moon by MarkieAnn Packer from the Noun Project  
+
+https://creativecommons.org/licenses/by/3.0/us/
