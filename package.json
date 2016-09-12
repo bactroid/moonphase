@@ -2,7 +2,7 @@
   "name": "moonphase",
   "version": "0.0.1",
   "description": "Displays current moon phase and days to next full/new moon",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test/test.js"
   },
