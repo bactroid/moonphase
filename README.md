@@ -20,6 +20,12 @@ Uses Lune by Ryan Seys for lunar phase calculations. Hooray for standing on the 
 NPM: https://www.npmjs.com/package/lune  
 GitHub: https://github.com/ryanseys/lune
 
+### menubar
+I originally started down the path of rolling my own menu bar, but I quickly discovered that Max Ogden had already done the work for me.
+
+NPM: https://www.npmjs.com/package/menubar
+GitHub: https://github.com/maxogden/menubar
+
 ### validator
 
 Used for validation of user input.

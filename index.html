@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MoonPhase</title>
+    </head>
+    <body ng-app="phaseGUI">
+	    <div ng-controller="phaseDisplay as disp">
+		    <p>
+		    <script>
+			var remote = require('electron').remote;
+			var headText = '';
+			headText = remote.getGlobal('moonData').phaseText;
+			headText += ' (';
+			headText += remote.getGlobal('moonData').illuminationPercent;
+			headText += '%)';
+			document.write(headText);
+		    </script>
+		    </p> 
+
+		    <p>Next New Moon:<br />
+		    <script>
+			document.write(remote.getGlobal('moonData').nextNew);
+		    </script>
+		    </p>
+
+		    <p>Next Full Moon:<br />
+		    <script>
+			document.write(remote.getGlobal('moonData').nextFull);
+		    </script>
+		    </p>
+	    </div>
+    </body>
+</html>
