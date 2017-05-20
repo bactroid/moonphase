@@ -1,4 +1,4 @@
-const expect = require('chai').expect
+const {test} = require('tape')
 const moonphase = require('./moonphase')
 
 const dateOne = new Date('2015-12-25 05:00')
@@ -9,76 +9,47 @@ const endDate = new Date('2016-01-31 00:00 EST')
 const knownNew = new Date('Sat Jan 09 2016 20:31:16.321 GMT-0500 (EST)')
 const knownFull = new Date('Sat Jan 23 2016 20:46:20.217 GMT-0500 (EST)')
 
-describe('getMoonPhase', () => {
-  it('should return Full Moon for 2015-12-25', () => {
-    const result = moonphase.getMoonPhase(dateOne)
-    expect(result).to.equal('Full Moon')
-  })
-  it('should return Waxing Crescent for 2016-09-05', () => {
-    const result = moonphase.getMoonPhase(dateTwo)
-    expect(result).to.equal('Waxing Crescent')
-  })
-  it('should return Waning Gibbous for 2016-01-01', () => {
-    const result = moonphase.getMoonPhase(startDate)
-    expect(result).to.equal('Waning Gibbous')
-  })
-  it('should return Last Quarter for 2016-01-31', () => {
-    const result = moonphase.getMoonPhase(endDate)
-    expect(result).to.equal('Last Quarter')
-  })
+test('getMoonPhase', assert => {
+  assert.equal(moonphase.getMoonPhase(dateOne), 'Full Moon', 'Should return Full Moon for 2015-12-25')
+  assert.equal(moonphase.getMoonPhase(dateTwo), 'Waxing Crescent', 'Should return Waxing Crescent for 2016-09-05')
+  assert.equal(moonphase.getMoonPhase(startDate), 'Waning Gibbous', 'Should return Waning Gibbous for 2016-01-01')
+  assert.equal(moonphase.getMoonPhase(endDate), 'Last Quarter', 'Should return Last Quarter for 2016-01-31')
+  assert.end()
 })
 
-describe('getIlluminationPercent', () => {
-  it('should return 100 for 2015-12-25', () => {
-    const result = moonphase.getIlluminationPercent(dateOne)
-    expect(result).to.equal(100)
-  })
-  it('should return 13 for 2016-09-05', () => {
-    const result = moonphase.getIlluminationPercent(dateTwo)
-    expect(result).to.equal(13)
-  })
-  it('should return 60 for 2016-01-01', () => {
-    result = moonphase.getIlluminationPercent(startDate)
-    expect(result).to.equal(60)
-  })
-  it('should return 59 for 2016-01-31', () => {
-    const result = moonphase.getIlluminationPercent(endDate)
-    expect(result).to.equal(59)
-  })
+test('getIlluminationPercent', assert => {
+  assert.equal(moonphase.getIlluminationPercent(dateOne), 100, 'Should return 100 for 2015-12-25')
+  assert.equal(moonphase.getIlluminationPercent(dateTwo), 13, 'Should return 13 for 2016-09-05')
+  assert.equal(moonphase.getIlluminationPercent(startDate), 60, 'Should return 60 for 2016-01-01')
+  assert.equal(moonphase.getIlluminationPercent(endDate), 59, 'Should return 59 for 2016-01-31')
+  assert.end()
 })
 
-describe('getEndDate', () => {
-  it('should return 2016-01-31 for 2016-01-01', () => {
-    const result = moonphase.getEndDate(startDate)
-    expect(result.valueOf()).to.equal(endDate.valueOf())
-  })
+test('getEndDate', assert => {
+  assert.equal(moonphase.getEndDate(startDate).valueOf(), endDate.valueOf(), 'Should return 2016-01-31 for 2016-01-01')
+  assert.end()
 })
 
-describe('getPhases', () => {
-  it('should return correct phase dates for a known period', () => {
-    const result = moonphase.getPhases(startDate, endDate)
-    expect(result.newMoon.valueOf()).to.equal(knownNew.valueOf())
-    expect(result.fullMoon.valueOf()).to.equal(knownFull.valueOf())
-  })
+test('getPhases', assert => {
+  const result = moonphase.getPhases(startDate, endDate)
+  assert.equal(result.newMoon.valueOf(), knownNew.valueOf(), 'Should return 2016-01-09 as the new moon date')
+  assert.equal(result.fullMoon.valueOf(), knownFull.valueOf(), 'Should return 2016-01-23 as the new moon date')
+  assert.end()
 })
 
-describe('getPhaseInfo', () => {
-  it('should return an accurate object for a known period', () => {
-    const result = moonphase.getPhaseInfo(startDateText)
-    expect(result.phaseText).to.equal('Waning Gibbous')
-    expect(result.illuminationPercent).to.equal(60)
-    expect(result.nextNew.valueOf()).to.equal(knownNew.valueOf())
-    expect(result.nextFull.valueOf()).to.equal(knownFull.valueOf())
-  })
-  it('should return nothing if date format is invalid', () => {
-    const result = moonphase.getPhaseInfo('notadate')
-    expect(result).to.equal(undefined)
-  })
+test('getPhaseInfo', assert => {
+  const expected = {
+    phaseText: 'Waning Gibbous',
+    illuminationPercent: 60,
+    nextFull: knownFull,
+    nextNew: knownNew
+  }
+  const actual = moonphase.getPhaseInfo(startDateText)
+  assert.deepEqual(actual, expected, 'Should return an accurate object for a known period')
+  assert.end()
 })
 
-describe('getPhaseText', () => {
-  it('should return empty string if date format is invalid', () => {
-    const result = moonphase.getPhaseText('notadate')
-    expect(result).to.equal('')
-  })
+test('getPhaseText', assert => {
+  assert.equal(moonphase.getPhaseText('notadate'), '', 'Should return empty string if date format is invalid')
+  assert.end()
 })
