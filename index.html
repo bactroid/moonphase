@@ -3,31 +3,33 @@
     <head>
         <meta charset="utf-8">
         <title>MoonPhase</title>
+        <script>const remote = require('electron').remote</script>
     </head>
     <body>
 	    <div>
-		    <p>
-		    <script>
-    			const remote = require('electron').remote;
-    			let headText = '';
-    			headText = remote.getGlobal('moonData').phaseText;
-    			headText += ' (';
-    			headText += remote.getGlobal('moonData').illuminationPercent;
-    			headText += '%)';
-    			document.write(headText);
-		    </script>
+		    <h1>
+          <script>
+            document.write(remote.getGlobal('moonData').phaseText)
+          </script> (
+          <script>
+            document.write(remote.getGlobal('moonData').illuminationPercent)
+          </script>%)
+        </h1>
+
+		    <h2>Next New Moon:</h2>
+
+        <p>
+  		    <script>
+      			document.write(remote.getGlobal('moonData').nextNew);
+  		    </script>
 		    </p>
 
-		    <p>Next New Moon:<br />
-		    <script>
-    			document.write(remote.getGlobal('moonData').nextNew);
-		    </script>
-		    </p>
+		    <h2>Next Full Moon:</h2>
 
-		    <p>Next Full Moon:<br />
-		    <script>
-			    document.write(remote.getGlobal('moonData').nextFull);
-		    </script>
+        <p>
+  		    <script>
+  			    document.write(remote.getGlobal('moonData').nextFull);
+  		    </script>
 		    </p>
 	    </div>
     </body>
