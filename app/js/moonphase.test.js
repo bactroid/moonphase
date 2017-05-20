@@ -9,6 +9,13 @@ const endDate = new Date('2016-01-31 00:00 EST')
 const knownNew = new Date('Sat Jan 09 2016 20:31:16.321 GMT-0500 (EST)')
 const knownFull = new Date('Sat Jan 23 2016 20:46:20.217 GMT-0500 (EST)')
 
+const phaseObj = {
+  phaseText: 'Waning Gibbous',
+  illuminationPercent: 60,
+  nextFull: knownFull,
+  nextNew: knownNew
+}
+
 test('getMoonPhase', assert => {
   assert.equal(moonphase.getMoonPhase(dateOne), 'Full Moon', 'Should return Full Moon for 2015-12-25')
   assert.equal(moonphase.getMoonPhase(dateTwo), 'Waxing Crescent', 'Should return Waxing Crescent for 2016-09-05')
@@ -50,6 +57,12 @@ test('getPhaseInfo', assert => {
 })
 
 test('getPhaseText', assert => {
-  assert.equal(moonphase.getPhaseText('notadate'), '', 'Should return empty string if date format is invalid')
+  const expected = 'Waning Gibbous (60%)\n' +
+                   'Next new moon is on:\n' +
+                   'Sat Jan 09 2016 20:31:16 GMT-0500 (EST)\n' +
+                   'Next full moon is on:\n' +
+                   'Sat Jan 23 2016 20:46:20 GMT-0500 (EST)\n'
+  const actual = moonphase.getPhaseText(phaseObj)
+  assert.equal(actual, expected, 'Should return an expected string based on a phase object.')
   assert.end()
 })

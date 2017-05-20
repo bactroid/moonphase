@@ -1,135 +1,99 @@
 const lune = require('lune')
 const validator = require('validator')
 
-const getPhaseInfo = d => {
-  const startDate = setStartDate(d)
+const getPhaseInfo = date => {
+  const startDate = getStartDate(date)
 
-  if (startDate === null) {
-    return
-  }
+  if (startDate === null) return
 
-  const endDate = getEndDate(startDate)
-  const phaseText = getMoonPhase(startDate)
-  const illuminationPercent = getIlluminationPercent(startDate)
-  const nextPhases = getPhases(startDate, endDate)
+  const nextPhases = getPhases(startDate, getEndDate(startDate))
   return {
-    phaseText: phaseText,
-    illuminationPercent: illuminationPercent,
+    phaseText: getMoonPhase(startDate),
+    illuminationPercent: getIlluminationPercent(startDate),
     nextNew: nextPhases.newMoon,
     nextFull: nextPhases.fullMoon
   }
 }
 
-const getPhaseText = d => {
-  let returnText = ''
+// Returns a detailed string formatted for console display
+const getPhaseText = phaseInfo => {
+  const makePhaseString = obj => obj.phaseText + ' (' + obj.illuminationPercent + '%)\n'
 
-  const phaseInfo = getPhaseInfo(d)
-  if (phaseInfo === undefined) return ''
+  // Logic to display appropriate next moon phases
+  // We don't want to describe the phases out of order.
+  const makeNextPhasesString = obj =>
+    phaseInfo.nextNew > phaseInfo.nextFull
+      ? formatPhaseText(phaseInfo.nextFull, 'full') + formatPhaseText(phaseInfo.nextNew, 'new')
+      : formatPhaseText(phaseInfo.nextNew, 'new') + formatPhaseText(phaseInfo.nextFull, 'full')
 
-  returnText += phaseInfo.phaseText
-  returnText += ' ('
-  returnText += phaseInfo.illuminationPercent
-  returnText += '%)\n'
-
-    // Logic to display appropriate next moon phases
-    // We don't want to describe the phases out of order.
-  if (phaseInfo.nextNew > phaseInfo.nextFull) {
-    returnText += getNextFullMoon(phaseInfo.nextFull)
-    returnText += getNextNewMoon(phaseInfo.nextNew)
-  } else {
-    returnText += getNextNewMoon(phaseInfo.nextNew)
-    returnText += getNextFullMoon(phaseInfo.nextFull)
-  }
-
-  return returnText
-}
-
-const setStartDate = date => {
-  if (date === undefined) {
-    return new Date()
-  } else {
-    if (validator.isDate(date)) return new Date(date + ' 05:00')
-    else {
-      return null
-    }
-  }
+  return makePhaseString(phaseInfo) + makeNextPhasesString(phaseInfo)
 }
 
 // Returns the day 30 days from startDate
 const getEndDate = startDate => {
-  var date = new Date(startDate.toDateString())
+  let date = new Date(startDate.toDateString())
   date.setDate(date.getDate() + 30)
   return date
 }
 
 // Return the current phase of the moon with a natural language response
-// and a percentage
 // e.g. "Waxing Crescent"
-const getMoonPhase = checkDate => {
-  const phaseList = lune.phase_hunt(checkDate)
+const getMoonPhase = date => {
+  const dayOnly = getDayOnlyPhases(date)
+  const isNewMoon = date => date.valueOf() === dayOnly.newMoon.valueOf()
+  const isFirstQuarter = date => date.valueOf() === dayOnly.firstQuarter.valueOf()
+  const isFullMoon = date => date.valueOf() === dayOnly.fullMoon.valueOf()
+  const isLastQuarter = date => date.valueOf() === dayOnly.lastQuarter.valueOf()
+  const isWaxingCrescent = date => date > dayOnly.newMoon && date < dayOnly.firstQuarter
+  const isWaxingGibbous = date => date > dayOnly.firstQuarter && date < dayOnly.fullMoon
+  const isWaningGibbous = date => date > dayOnly.fullMoon && date < dayOnly.lastQuarter
+  const isWaningCrescent = date => date > dayOnly.lastQuarter
 
-  // Populate 'day only' dates of the phases and user date
-  var newMoon = new Date(phaseList.new_date)
-  var firstQuarter = new Date(phaseList.q1_date)
-  var fullMoon = new Date(phaseList.full_date)
-  var lastQuarter = new Date(phaseList.q3_date)
+  return isNewMoon(date) ? 'New Moon'
+       : isFirstQuarter(date) ? 'First Quarter'
+       : isFullMoon(date) ? 'Full Moon'
+       : isLastQuarter(date) ? 'Last Quarter'
+       : isWaxingCrescent(date) ? 'Waxing Crescent'
+       : isWaxingGibbous(date) ? 'Waxing Gibbous'
+       : isWaningGibbous(date) ? 'Waning Gibbous'
+       : isWaningCrescent(date) ? 'Waning Crescent' : null
+}
+
+// Return an integer representation the moon's percentage of illumination on a given date
+const getIlluminationPercent = date => Math.round(lune.phase(date).illuminated * 100)
+
+// Return an object with the next new and full moon as Date object properties
+const getPhases = (start, end) => ({
+  newMoon: new Date(lune.phase_range(start, end, lune.PHASE_NEW)[0]),
+  fullMoon: new Date(lune.phase_range(start, end, lune.PHASE_FULL)[0])
+})
+
+// PRIVATE FUNCTIONS
+
+// Return a string declaring the date when a given phase will be
+const formatPhaseText = (date, phase) => 'Next ' + phase + ' moon is on:\n' + date + '\n'
+
+// Return object with 'day only' dates of the phases and user date
+const getDayOnlyPhases = date => {
+  const phaseList = lune.phase_hunt(date)
+  let newMoon = new Date(phaseList.new_date)
+  let firstQuarter = new Date(phaseList.q1_date)
+  let fullMoon = new Date(phaseList.full_date)
+  let lastQuarter = new Date(phaseList.q3_date)
 
   newMoon.setHours(0, 0, 0, 0)
   firstQuarter.setHours(0, 0, 0, 0)
   fullMoon.setHours(0, 0, 0, 0)
   lastQuarter.setHours(0, 0, 0, 0)
-  checkDate.setHours(0, 0, 0, 0)
+  date.setHours(0, 0, 0, 0)
 
-  // If date's phase matches a named phase...
-  // Oddly enough, these comparisons won't work without valueOf().
-
-  if (checkDate.valueOf() === newMoon.valueOf()) {
-    return 'New Moon'
-  } else if (checkDate.valueOf() === firstQuarter.valueOf()) {
-    return 'First Quarter'
-  } else if (checkDate.valueOf() === fullMoon.valueOf()) {
-    return 'Full Moon'
-  } else if (checkDate.valueOf() === lastQuarter.valueOf()) {
-    return 'Last Quarter'
-  } else if (checkDate > newMoon && checkDate < firstQuarter) {
-    return 'Waxing Crescent'
-  } else if (checkDate > firstQuarter && checkDate < fullMoon) {
-    return 'Waxing Gibbous'
-  } else if (checkDate > fullMoon && checkDate < lastQuarter) {
-    return 'Waning Gibbous'
-  } else if (checkDate > lastQuarter) {
-    return 'Waning Crescent'
-  }
-
-  return null
+  return {date, newMoon, firstQuarter, fullMoon, lastQuarter}
 }
 
-const getIlluminationPercent = date => {
-  const phaseInfo = lune.phase(date)
-  return Math.round(phaseInfo.illuminated * 100)
-}
-
-// Return an object with the next new and full moon as Date object
-// properties
-const getPhases = (start, end) => {
-    // Load next full moon date
-  let phase = lune.phase_range(start, end, lune.PHASE_FULL)
-  var fullMoon = new Date(phase[0])
-
-    // Load next new moon date
-  phase = lune.phase_range(start, end, lune.PHASE_NEW)
-  var newMoon = new Date(phase[0])
-  return {
-    newMoon: newMoon,
-    fullMoon: fullMoon
-  }
-}
-
-// Return next new moon date text
-const getNextNewMoon = date => 'Next new moon is on: \n' + date + '\n'
-
-// Return next full moon date
-const getNextFullMoon = date => 'Next full moon is on: \n' + date + '\n'
+// Returns a Date object based on user input
+const getStartDate = date =>
+    date === undefined ? new Date()
+  : validator.isDate(date) ? new Date(date + ' 05:00') : null
 
 module.exports = {
   getPhaseInfo,
