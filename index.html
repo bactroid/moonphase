@@ -4,29 +4,29 @@
         <meta charset="utf-8">
         <title>MoonPhase</title>
     </head>
-    <body ng-app="phaseGUI">
-	    <div ng-controller="phaseDisplay as disp">
+    <body>
+	    <div>
 		    <p>
 		    <script>
-			var remote = require('electron').remote;
-			var headText = '';
-			headText = remote.getGlobal('moonData').phaseText;
-			headText += ' (';
-			headText += remote.getGlobal('moonData').illuminationPercent;
-			headText += '%)';
-			document.write(headText);
+    			const remote = require('electron').remote;
+    			let headText = '';
+    			headText = remote.getGlobal('moonData').phaseText;
+    			headText += ' (';
+    			headText += remote.getGlobal('moonData').illuminationPercent;
+    			headText += '%)';
+    			document.write(headText);
 		    </script>
-		    </p> 
+		    </p>
 
 		    <p>Next New Moon:<br />
 		    <script>
-			document.write(remote.getGlobal('moonData').nextNew);
+    			document.write(remote.getGlobal('moonData').nextNew);
 		    </script>
 		    </p>
 
 		    <p>Next Full Moon:<br />
 		    <script>
-			document.write(remote.getGlobal('moonData').nextFull);
+			    document.write(remote.getGlobal('moonData').nextFull);
 		    </script>
 		    </p>
 	    </div>

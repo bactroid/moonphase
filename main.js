@@ -1,14 +1,14 @@
-var menubar = require('menubar');
-var moonphase = require('./app/js/moonphase');
+const menubar = require('menubar')
+const path = require('path')
+const moonphase = require('./app/js/moonphase')
 
-var options = {
-  icon: 'app/img/full.png'
-};
+const options = {
+  icon: 'app/img/full@2x.png'
+}
 
-var mb = menubar(options);
+const mb = menubar(options)
 
 mb.on('ready', function main () {
-  global.moonData = moonphase.getPhaseInfo();
-  console.log('Ready!');
-});
-
+  global.moonData = moonphase.getPhaseInfo()
+  console.log('Ready!')
+})
