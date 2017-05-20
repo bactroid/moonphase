@@ -1,7 +1,6 @@
 var expect = require('chai').expect;
-var moonphase = require('../moonphase');
+var moonphase = require('./moonphase');
 
-var result;
 var dateOne = new Date('2015-12-25 05:00');
 var dateTwo = new Date('2016-09-05 05:00');
 var startDateText = '2016-01-01';
@@ -12,6 +11,7 @@ var knownFull = new Date('Sat Jan 23 2016 20:46:20.217 GMT-0500 (EST)');
 
 
 describe('getMoonPhase', function () {
+    let result;
     it('should return Full Moon for 2015-12-25', function () {
         result = moonphase.getMoonPhase(dateOne);
         expect(result).to.equal('Full Moon');
@@ -31,6 +31,7 @@ describe('getMoonPhase', function () {
 });
 
 describe('getIlluminationPercent', function () {
+  let result;
     it('should return 100 for 2015-12-25', function () {
         result = moonphase.getIlluminationPercent(dateOne);
         expect(result).to.equal(100);
@@ -50,6 +51,7 @@ describe('getIlluminationPercent', function () {
 });
 
 describe('getEndDate', function () {
+  let result;
     it('should return 2016-01-31 for 2016-01-01', function () {
         result = moonphase.getEndDate(startDate);
         expect(result.valueOf()).to.equal(endDate.valueOf());
@@ -57,6 +59,7 @@ describe('getEndDate', function () {
 });
 
 describe('getPhases', function () {
+  let result;
     it('should return correct phase dates for a known period', function () {
         result = moonphase.getPhases(startDate, endDate);
         expect(result.newMoon.valueOf()).to.equal(knownNew.valueOf());
@@ -65,6 +68,7 @@ describe('getPhases', function () {
 });
 
 describe('getPhaseInfo', function () {
+  let result;
     it('should return an accurate object for a known period', function() {
         result = moonphase.getPhaseInfo(startDateText);
         expect(result.phaseText).to.equal('Waning Gibbous');
@@ -79,6 +83,7 @@ describe('getPhaseInfo', function () {
 });
 
 describe('getPhaseText', function () {
+  let result;
     it('should return empty string if date format is invalid', function () {
         result = moonphase.getPhaseText('notadate');
         expect(result).to.equal('');
