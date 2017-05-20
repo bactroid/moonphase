@@ -8,7 +8,7 @@
   },
   "author": "Kate Haskell <fuzzcat@bactroid.net>",
   "bin": {
-    "moonphase": "./bin/moonphase"
+    "moonphase": "./bin/moonphase.js"
   },
   "license": "GPL-3.0",
   "dependencies": {
