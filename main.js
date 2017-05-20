@@ -1,5 +1,4 @@
 const menubar = require('menubar')
-const path = require('path')
 const moonphase = require('./app/js/moonphase')
 
 const options = {
