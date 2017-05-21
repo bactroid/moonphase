@@ -66,3 +66,19 @@ test('getPhaseText', assert => {
   assert.equal(actual, expected, 'Should return an expected string based on a phase object.')
   assert.end()
 })
+
+test('getPhaseList', assert => {
+  const expected = [
+    'New Moon',
+    'Waxing Crescent',
+    'First Quarter',
+    'Waxing Gibbous',
+    'Full Moon',
+    'Waning Gibbous',
+    'Waning Crescent'
+  ]
+
+  const actual = moonphase.getPhaseList()
+  assert.deepEqual(actual, expected, 'Should return an array of expected natural language phase names.')
+  assert.end()
+})

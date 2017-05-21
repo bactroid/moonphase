@@ -12,6 +12,7 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "lodash": "^4.17.4",
     "lune": "^0.4.0",
     "menubar": "^5.1.0",
     "validator": "^5.6.0"

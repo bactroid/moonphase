@@ -68,6 +68,18 @@ const getPhases = (start, end) => ({
   fullMoon: new Date(lune.phase_range(start, end, lune.PHASE_FULL)[0])
 })
 
+// Return an array of natural language moon phases used in this library
+const getPhaseList = () =>
+  [
+    'New Moon',
+    'Waxing Crescent',
+    'First Quarter',
+    'Waxing Gibbous',
+    'Full Moon',
+    'Waning Gibbous',
+    'Waning Crescent'
+  ]
+
 // PRIVATE FUNCTIONS
 
 // Return a string declaring the date when a given phase will be
@@ -101,5 +113,6 @@ module.exports = {
   getIlluminationPercent,
   getEndDate,
   getMoonPhase,
-  getPhases
+  getPhases,
+  getPhaseList
 }
