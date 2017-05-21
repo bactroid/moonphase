@@ -17,7 +17,7 @@ const getPhaseInfo = date => {
 
 // Returns a detailed string formatted for console display
 const getPhaseText = phaseInfo => {
-  const makePhaseString = obj => obj.phaseText + ' (' + obj.illuminationPercent + '%)\n'
+  const makePhaseString = obj => `${obj.phaseText} (${obj.illuminationPercent}%)\n`
 
   // Logic to display appropriate next moon phases
   // We don't want to describe the phases out of order.
@@ -83,7 +83,7 @@ const getPhaseList = () =>
 // PRIVATE FUNCTIONS
 
 // Return a string declaring the date when a given phase will be
-const formatPhaseText = (date, phase) => 'Next ' + phase + ' moon is on:\n' + date + '\n'
+const formatPhaseText = (date, phase) => `Next ${phase} moon is on:\n${date}\n`
 
 // Return object with 'day only' dates of the phases and user date
 const getDayOnlyPhases = date => {
