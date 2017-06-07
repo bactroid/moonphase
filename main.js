@@ -23,7 +23,6 @@ const buildIconObject = (path = `${__dirname}/app/img/`, retina = true) => {
 mb.on('ready', function main () {
   const phaseInfo = moonphase.getPhaseInfo()
   const moonIcons = buildIconObject()
-  console.log(moonIcons)
   mb.tray.setImage(moonIcons[phaseInfo.phaseText])
   global.moonData = phaseInfo
   console.log('Ready!')
