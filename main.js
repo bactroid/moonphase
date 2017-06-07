@@ -8,7 +8,7 @@ const options = {
 
 const mb = menubar(options)
 
-const buildIconObject = (path = 'app/img/', retina = true) => {
+const buildIconObject = (path = `${__dirname}/app/img/`, retina = true) => {
   const phaseList = moonphase.getPhaseList()
 
   const reducer = (path, retina) => (obj, item) => {
@@ -23,6 +23,7 @@ const buildIconObject = (path = 'app/img/', retina = true) => {
 mb.on('ready', function main () {
   const phaseInfo = moonphase.getPhaseInfo()
   const moonIcons = buildIconObject()
+  console.log(moonIcons)
   mb.tray.setImage(moonIcons[phaseInfo.phaseText])
   global.moonData = phaseInfo
   console.log('Ready!')
