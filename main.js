@@ -2,11 +2,7 @@ const menubar = require('menubar')
 const moonphase = require('./app/js/moonphase')
 const _ = require('lodash')
 
-const options = {
-  icon: 'app/img/full@2x.png'
-}
-
-const mb = menubar(options)
+const mb = menubar()
 
 const buildIconObject = (path = `${__dirname}/app/img/`, retina = true) => {
   const phaseList = moonphase.getPhaseList()
