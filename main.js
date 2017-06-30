@@ -21,5 +21,6 @@ mb.on('ready', function main () {
   const moonIcons = buildIconObject()
   mb.tray.setImage(moonIcons[phaseInfo.phaseText])
   global.moonData = phaseInfo
+  global.appQuit = mb.app.quit
   console.log('Ready!')
 })

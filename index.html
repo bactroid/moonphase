@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>MoonPhase</title>
-        <script>const remote = require('electron').remote</script>
-    </head>
-    <body>
-	    <div>
-		    <h1>
-          <script>
-            document.write(remote.getGlobal('moonData').phaseText)
-          </script>
-          (<script>
-            document.write(remote.getGlobal('moonData').illuminationPercent)
-          </script>%)
-        </h1>
+  <head>
+    <meta charset="utf-8">
+    <title>MoonPhase</title>
+    <script>const remote = require('electron').remote</script>
+  </head>
+  <body>
+    <div>
+      <h1>
+        <script>
+          document.write(remote.getGlobal('moonData').phaseText)
+        </script>
+        (<script>
+          document.write(remote.getGlobal('moonData').illuminationPercent)
+        </script>%)
+      </h1>
 
-		    <h2>Next New Moon:</h2>
+      <h2>Next New Moon:</h2>
 
-        <p>
-  		    <script>
-      			document.write(remote.getGlobal('moonData').nextNew);
-  		    </script>
-		    </p>
+      <p>
+        <script>
+          document.write(remote.getGlobal('moonData').nextNew);
+        </script>
+      </p>
 
-		    <h2>Next Full Moon:</h2>
+      <h2>Next Full Moon:</h2>
 
-        <p>
-  		    <script>
-  			    document.write(remote.getGlobal('moonData').nextFull);
-  		    </script>
-		    </p>
-	    </div>
-    </body>
+      <p>
+        <script>
+          document.write(remote.getGlobal('moonData').nextFull);
+        </script>
+      </p>
+
+      <button onClick="remote.getGlobal('appQuit')()">Quit</button>
+    </div>
+  </body>
 </html>
