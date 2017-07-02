@@ -1,33 +1,42 @@
 {
   "name": "moonphase",
-  "version": "0.0.1",
-  "description": "Displays current moon phase and days to next full/new moon",
-  "main": "main.js",
-  "scripts": {
-    "test": "standard && node app/js/moonphase.test.js",
-    "start": "electron main.js"
-  },
-  "author": "Kate Haskell <fuzzcat@bactroid.net>",
-  "bin": {
-    "moonphase": "./bin/moonphase.js"
-  },
-  "license": "GPL-3.0",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "lodash": "^4.17.4",
     "lune": "^0.4.0",
-    "menubar": "^5.1.0",
-    "validator": "^5.6.0"
+    "material-ui": "^0.18.5",
+    "menubar": "^5.2.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.10",
+    "react-tap-event-plugin": "^2.0.1",
+    "validator": "^7.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "moontest": "standard && node app/js/moonphase.test.js"
+  },
+  "bin": {
+    "moonphase": "./bin/moonphase.js"
   },
   "devDependencies": {
-    "electron": "^1.4.13",
-    "electron-packager": "^8.7.1",
+    "electron": "^1.6.11",
+    "electron-packager": "^8.7.2",
     "standard": "^10.0.2",
-    "tape": "^4.6.3"
+    "tape": "^4.7.0"
   },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "main": "main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bactroid/moonphase.git"
   },
+  "author": "Kate Haskell <fuzzcat@bactroid.net>",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/bactroid/moonphase/issues"
   },
