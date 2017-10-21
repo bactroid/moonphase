@@ -5,11 +5,11 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "lune": "^0.4.0",
-    "material-ui": "^0.18.5",
+    "material-ui": "^0.18.7",
     "menubar": "^5.2.3",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-scripts": "^1.0.10",
     "react-tap-event-plugin": "^2.0.1",
     "validator": "^7.2.0"
   },
