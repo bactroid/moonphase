@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import AppBar from 'material-ui/AppBar'
 import PhaseInfo from './PhaseInfo'
 import './App.css'
 
@@ -15,7 +14,6 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div className='App'>
-          <AppBar title={'MoonPhase'} />
           <PhaseInfo phaseObj={this.state} />
         </div>
       </MuiThemeProvider>
