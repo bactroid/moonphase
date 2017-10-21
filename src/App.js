@@ -1,19 +1,24 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
+import React, {Component} from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui/AppBar'
+import PhaseInfo from './PhaseInfo'
 import './App.css'
 
+const moonphase = require('./moonphase')
+
 class App extends Component {
+  constructor () {
+    super()
+    this.state = moonphase.getPhaseInfo()
+  }
   render () {
     return (
-      <div className='App'>
-        <div className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h2>Welcome to React</h2>
+      <MuiThemeProvider>
+        <div className='App'>
+          <AppBar title={'MoonPhase'} />
+          <PhaseInfo phaseObj={this.state} />
         </div>
-        <p className='App-intro'>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
