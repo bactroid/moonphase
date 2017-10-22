@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.4",
-    "lune": "^0.4.0",
+    "lune": "file:../lune",
     "material-ui": "^1.0.0-beta.17",
     "menubar": "^5.2.3",
     "react": "^15.6.2",
@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "moontest": "standard && node app/js/moonphase.test.js"
+    "moontest": "node app/js/moonphase.test.js"
   },
   "bin": {
     "moonphase": "./bin/moonphase.js"
@@ -40,5 +40,5 @@
   "bugs": {
     "url": "https://github.com/bactroid/moonphase/issues"
   },
-  "homepage": "https://github.com/bactroid/moonphase#readme"
+  "homepage": "./"
 }
