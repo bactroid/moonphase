@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PhaseInfo from './PhaseInfo'
 import './App.css'
 
@@ -12,11 +11,9 @@ class App extends Component {
   }
   render () {
     return (
-      <MuiThemeProvider>
-        <div className='App'>
-          <PhaseInfo phaseObj={this.state} />
-        </div>
-      </MuiThemeProvider>
+      <div className='App'>
+        <PhaseInfo phaseObj={this.state} />
+      </div>
     )
   }
 }

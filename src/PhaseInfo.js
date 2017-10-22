@@ -1,16 +1,17 @@
 import React from 'react'
 import Typography from 'material-ui/Typography'
+import List, {ListItem, ListItemText} from 'material-ui/List'
 import './PhaseInfo.css'
 
 const makeNextPhasesString = obj =>
   obj.nextNew > obj.nextFull
-    ? <div><div><Typography type='subheading'>Full Moon:</Typography> {obj.nextFull.toString()}</div><div><Typography type='subheading'>New Moon:</Typography> {obj.nextNew.toString()}</div></div>
-    : <div><div><Typography type='subheading'>New Moon:</Typography> {obj.nextNew.toString()}</div><div><Typography type='subheading'>Full Moon:</Typography> {obj.nextFull.toString()}</div></div>
+    ? <List><ListItem button><ListItemText primary='Full Moon:' secondary={obj.nextFull.toString()} /></ListItem><ListItem button><ListItemText primary='New Moon:' secondary={obj.nextNew.toString()} /></ListItem></List>
+    : <List><ListItem button><ListItemText primary='New Moon:' secondary={obj.nextNew.toString()} /></ListItem><ListItem button><ListItemText primary='Full Moon:' secondary={obj.nextFull.toString()} /></ListItem></List>
 
 const PhaseInfo = ({phaseObj}) => {
   return (
     <div id='phaseinfo'>
-      <Typography type='title'>{phaseObj.phaseText} ({phaseObj.illuminationPercent}%)</Typography>
+      <Typography type='headline'>{phaseObj.phaseText} ({phaseObj.illuminationPercent}%)</Typography>
       {makeNextPhasesString(phaseObj)}
     </div>
   )
